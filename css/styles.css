@@ -2,3 +2,12 @@
    width: 70px;
    height: 70px;
 }
+
+.middle-box{
+    width: 45%;
+    height: 0 auto;
+}
+
+.center{
+    margin: 50px auto 20px auto;
+}

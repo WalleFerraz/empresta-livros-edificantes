@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../images/nsa-para-logo-removebg.png" type="image/png">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
@@ -19,9 +20,9 @@
             </a>
             <!-- header -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="home.php">Home</a></li>
                 <li><a href="#">Livros</a></li>
                 <li><a href="#">Leitores</a></li>
-                <li><a href="#">Controle</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
             </ul>

@@ -17,13 +17,16 @@
             <a href="../pages/home.php">
                 <img src="../images/logo-empresta-livro.png" alt="Logo do site empresta livro" class="logoSize">
             </a>
-
+            <!-- header -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#">Livros</a></li>
                 <li><a href="#">Leitores</a></li>
                 <li><a href="#">Controle</a></li>
+                <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
+                <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
             </ul>
         </div>
+
     </nav>
     <br>
     <br>
@@ -32,6 +35,7 @@
     <br>
     <br>
     <br>
+    <!-- footer -->
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">

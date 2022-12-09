@@ -22,14 +22,18 @@
                 <li><a href="#">Livros</a></li>
                 <li><a href="#">Leitores</a></li>
                 <li><a href="#">Controle</a></li>
+                <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
+                <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
             </ul>
         </div>
     </nav>
+
     
+
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">
-                © 2014 Copyright Empresta Livro
+                © 2022 Copyright Empresta Livro
             </div>
         </div>
     </footer>

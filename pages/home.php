@@ -15,11 +15,9 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-
             <a href="../pages/home.php">
                 <img src="../images/logo-empresta-livro.png" alt="Logo do site empresta livro" class="logoSize">
             </a>
-
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="#">Livros</a></li>
@@ -29,6 +27,27 @@
             </ul>
         </div>
     </nav>
+
+    
+    <div class="row middle-box center">
+        <div class="col s4 center">
+            <div class="red darken-1">
+                <div class="white-text">
+                    <h5>45</h5>
+                    Livros guardados
+                </div>
+            </div>
+        </div>
+        <div class="col s4 offset-s4 center">
+            <div class="red darken-1">
+                <div class="white-text">
+                    <h5>6</h5>
+                    Livros emprestados
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="page-footer">
         <div class="footer-copyright">

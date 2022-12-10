@@ -1,3 +1,22 @@
+<?php
+require '../function/insertBook.php';
+
+if (!empty($_GET['action'])) {
+    if ($_GET['action'] == 'Save') {
+        //insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico)
+        insertBook(
+            $_GET['cpTitle'],
+            $_GET['cpAuthor'],
+            $_GET['cpDescription'],
+            $_GET['cpCategory'],
+            $_GET['cpPages'],
+            $_GET['cpPublic']
+        );
+    }
+}
+?>
+
+
 <html>
 
 <head>
@@ -23,8 +42,8 @@
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="#">Livros</a></li>
-                <li><a href="#">Leitores</a></li>
+                <li><a href="livro.php">Livros</a></li>
+                <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
             </ul>
@@ -40,17 +59,17 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="book_name" type="text" class="validate">
+                        <input name="cpTitle" id="book_name" type="text" class="validate">
                         <label for="book_name">Título do livro</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="author_name" type="text" class="validate">
+                        <input name="cpAuthor" id="author_name" type="text" class="validate">
                         <label for="author_name">Autor(a) do livro</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s5">
-                        <select>
+                        <select name="cpCategory">
                             <option value="" disabled selected>Categoria</option>
                             <option value="1">Meditação</option>
                             <option value="2">História</option>
@@ -60,7 +79,7 @@
                         </select>
                     </div>
                     <div class="input-field col s5">
-                        <select>
+                        <select name="cpPublic">
                             <option value="" disabled selected>Público indicado</option>
                             <option value="1">Criança</option>
                             <option value="2">Jovem</option>
@@ -70,20 +89,20 @@
                         </select>
                     </div>
                     <div class="input-field col s2">
-                        <input id="number_pages" type="number" class="validate">
+                        <input name="cpPages" id="number_pages" type="number" class="validate">
                         <label for="number_pages">Páginas</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="textarea" class="materialize-textarea"></textarea>
+                        <textarea name="cpDescription" id="textarea" class="materialize-textarea"></textarea>
                         <label for="textarea">Descrição do livro...</label>
                     </div>
                 </div>
 
                 <div class="row">
-                    <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">Salvar</button>
+                    <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
                 </div>
             </form>
         </div>

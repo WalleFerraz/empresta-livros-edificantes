@@ -1,14 +1,17 @@
 <?php
 require '../function/insertReader.php';
-session_start();
 
-$_SESSION['rs']='';
-if(!empty($_GET)){
-    $pst = buscaProduto($_GET['cpDes']);
-    $rs = $pst->fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION['rs']=$rs;        
+if (!empty($_GET['action'])) {
+    if ($_GET['action'] == 'Save') {
+        //insertReader($nome, $sobrenome, $numero, $email)
+        insertReader(
+            $_GET['cpName'],
+            $_GET['cpLastName'],
+            $_GET['cpPhone'],
+            $_GET['cpEmail']
+        );
+    }
 }
-
 ?>
 
 
@@ -35,8 +38,8 @@ if(!empty($_GET)){
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="#">Livros</a></li>
-                <li><a href="#">Leitores</a></li>
+                <li><a href="livro.php">Livros</a></li>
+                <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar livro</a></li>
             </ul>
@@ -49,29 +52,29 @@ if(!empty($_GET)){
             Cadastrar um novo leitor
         </h4>
         <div class="row">
-            <form class="col s12">
+            <form>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="first_name" type="text" class="validate">
+                        <input name="cpName" id="first_name" type="text" class="validate">
                         <label for="first_name">Nome</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
+                        <input name="cpLastName" id="last_name" type="text" class="validate">
                         <label for="last_name">Sobrenome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="email" type="email" class="validate">
+                        <input name="cpEmail" id="email" type="email" class="validate">
                         <label for="email">E-mail</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="phone" type="tel" class="validate">
+                        <input name="cpPhone" id="phone" type="tel" class="validate">
                         <label for="phone">Número de celular</label>
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">Salvar</button>
+                    <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
                 </div>
             </form>
         </div>

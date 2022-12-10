@@ -1,3 +1,17 @@
+<?php
+require '../function/insertReader.php';
+session_start();
+
+$_SESSION['rs']='';
+if(!empty($_GET)){
+    $pst = buscaProduto($_GET['cpDes']);
+    $rs = $pst->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['rs']=$rs;        
+}
+
+?>
+
+
 <html>
 
 <head>

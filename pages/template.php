@@ -21,8 +21,8 @@
             <!-- header -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="#">Livros</a></li>
-                <li><a href="#">Leitores</a></li>
+                <li><a href="livro.php">Livros</a></li>
+                <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
             </ul>

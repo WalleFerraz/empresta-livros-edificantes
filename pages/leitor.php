@@ -1,3 +1,14 @@
+<?php
+require '../function/consultReaderName.php';
+if (!empty($_GET)) {
+    if ($_GET['action']) {
+        $pst = consultReaderName($_GET['cpSearch']);
+        $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+?>
+
+
 <html>
 
 <head>
@@ -8,7 +19,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" href="../images/nsa-para-logo-removebg.png" type="image/png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- 
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
@@ -31,30 +42,71 @@
         </div>
     </nav>
 
-
-    <div>
-        <div class="row">
-            <div class="col s2">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../images/livro-suma-teologica.jpg">
-                        <!-- Dropdown Trigger -->
-                        <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
-
-                        <!-- Dropdown Structure -->
-                        <ul id='dropdown1' class='dropdown-content'>
-                            <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
-                            <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
-                        </ul>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title">Suma Teológica</span>
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
+    <!-- Campo de busca -->
+    <div class="center middle-box">
+        <form>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons small right">search</i>
+                    <input name="cpSearch" id="title" type="text" class="validate">
+                    <label for="title">Pesquisar leitor</label>
                 </div>
             </div>
+            <!-- Botão de buscar -->
+            <div class="row">
+                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Search">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12">
+            <table class="responsive-table">
+
+                <head>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Número de celular</th>
+                        <th>E-mail</th>
+                        <td></td>
+                    </tr>
+                </head>
+
+                <?php
+                if (!empty($_GET)) {
+                    foreach ($vet as $line) {
+                ?>
+
+                        <tr>
+                            <td><?= $line['id'] ?></td>
+                            <td><?= $line['nomeLeitor'] ?></td>
+                            <td><?= $line['sobrenomeLeitor'] ?></td>
+                            <td><?= $line['numeroCelular'] ?></td>
+                            <td><?= $line['email'] ?></td>
+                            
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
+                                    <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
+                                    <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                <?php
+                    } //foreach
+                } //if
+                ?>
+            </table>
         </div>
     </div>
+
 
 
     <!-- footer -->
@@ -70,7 +122,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var drop = document.querySelectorAll('.dropdown-trigger');
             M.Dropdown.init(drop, {
-                coverTrigger: false, 
+                coverTrigger: false,
                 constrainWidth: false
             });
         });

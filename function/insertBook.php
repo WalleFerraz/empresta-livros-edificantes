@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 
-function insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico)
+function insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico, $imagem)
 {
     switch ($categoria) {
         case '1':
@@ -45,15 +45,18 @@ function insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico)
             break;
     }
     
+    $change = $imagem;
+    $imagem = '../images/imagens-apontadas-pelo-banco/'.$change; 
+
     $pdo = connection();
-    $stmt = $pdo->prepare('INSERT INTO livro VALUES(DEFAULT, :nome, :autor, :descricao, :categoria, :paginas, :publico, DEFAULT)');
+    $stmt = $pdo->prepare('INSERT INTO livro VALUES(DEFAULT, :nome, :autor, :descricao, :categoria, :paginas, :publico, DEFAULT, :imagem');
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':autor', $autor);
     $stmt->bindValue(':descricao', $descricao);
     $stmt->bindValue(':categoria', $categoria);
     $stmt->bindValue(':paginas', $paginas);
     $stmt->bindValue(':publico', $publico);
-    $stmt->bindValue(':paginas', $paginas);
+    $stmt->bindValue(':imagem', $imagem);
     $stmt->execute();
     $pdo = null;
     return $stmt;

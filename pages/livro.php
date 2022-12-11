@@ -81,14 +81,15 @@ if (!empty($_GET)) {
                 <div class="col s2">
                     <div class="card">
                         <div class="card-image">
-                            <img src="../images/livro-suma-teologica.jpg">
+                            <img src="../images/imagens-apontadas-pelo-banco/imagem1.jpg"></img>
                             <!-- Dropdown Trigger -->
-                            <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
+                            <a class='drop  down-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
 
                             <!-- Dropdown Structure -->
                             <ul id='dropdown1' class='dropdown-content'>
                                 <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
                                 <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
+                                <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
                             </ul>
                         </div>
                         <div class="card-content">

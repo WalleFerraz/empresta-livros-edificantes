@@ -1,3 +1,10 @@
+<?php
+require '../function/consultBookEstado.php';
+
+$pst = consultBookEstado();
+$vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <html>
 
 <head>
@@ -28,23 +35,15 @@
         </div>
     </nav>
 
-    
+
     <div class="row middle-box center">
         <div class="col s4 center">
-            <div class="red darken-1">
-                <div class="white-text">
-                    <h5>45</h5>
-                    Livros guardados
-                </div>
-            </div>
+            <h3><?=$vet[0]['quantidade']?></h3>
+            <p>Livros guardados</p>
         </div>
         <div class="col s4 offset-s4 center">
-            <div class="red darken-1">
-                <div class="white-text">
-                    <h5>6</h5>
-                    Livros emprestados
-                </div>
-            </div>
+            <h3><?=$vet[1]['quantidade']?></h3>
+            <p>Livros emprestados</p>
         </div>
     </div>
 

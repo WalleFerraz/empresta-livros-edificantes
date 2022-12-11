@@ -1,19 +1,23 @@
 <?php
 require '../function/insertBook.php';
 
+var_dump($_GET);
+
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
-        //insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico)
+        //insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico, $imagem)
         insertBook(
             $_GET['cpTitle'],
             $_GET['cpAuthor'],
             $_GET['cpDescription'],
             $_GET['cpCategory'],
             $_GET['cpPages'],
-            $_GET['cpPublic']
+            $_GET['cpPublic'],
+            $_GET['cpWay']
         );
     }
 }
+
 ?>
 
 
@@ -26,6 +30,7 @@ if (!empty($_GET['action'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" href="../images/nsa-para-logo-removebg.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -56,7 +61,7 @@ if (!empty($_GET['action'])) {
             Cadastrar um novo livro
         </h4>
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s6">
                         <input name="cpTitle" id="book_name" type="text" class="validate">
@@ -95,11 +100,15 @@ if (!empty($_GET['action'])) {
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s8">
                         <textarea name="cpDescription" id="textarea" class="materialize-textarea"></textarea>
                         <label for="textarea">Descrição do livro...</label>
                     </div>
+                    <div class="col s4">
+                        <input name="cpWay" type="file">
+                    </div>
                 </div>
+
 
                 <div class="row">
                     <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
@@ -107,6 +116,7 @@ if (!empty($_GET['action'])) {
             </form>
         </div>
     </div>
+
 
 
     <footer class="page-footer">

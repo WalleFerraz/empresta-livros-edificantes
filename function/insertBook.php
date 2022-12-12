@@ -47,9 +47,9 @@ function insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico, $
     
     $change = $imagem;
     $imagem = '../images/imagens-apontadas-pelo-banco/'.$change; 
-
+   
     $pdo = connection();
-    $stmt = $pdo->prepare('INSERT INTO livro VALUES(DEFAULT, :nome, :autor, :descricao, :categoria, :paginas, :publico, DEFAULT, :imagem');
+    $stmt = $pdo->prepare('INSERT INTO livro VALUES(DEFAULT, :nome, :autor, :descricao, :categoria, :paginas, :publico, DEFAULT, :imagem)');
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':autor', $autor);
     $stmt->bindValue(':descricao', $descricao);

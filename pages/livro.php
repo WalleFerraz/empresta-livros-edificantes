@@ -83,7 +83,7 @@ if (!empty($_GET)) {
                         <div class="card-image">
                             <img src=<?=$card['imagem']?>></img>
                             <!-- Dropdown Trigger -->
-                            <a class='drop  down-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
+                            <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
 
                             <!-- Dropdown Structure -->
                             <ul id='dropdown1' class='dropdown-content'>

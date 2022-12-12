@@ -1,9 +1,6 @@
 <?php
 require '../function/consultBookName.php';
 
-//$pst = fullSearch();
-//$rs = $pst -> fetchAll(PDO::FETCH_ASSOC);
-
 if (!empty($_GET)) {
     if ($_GET['action'] == 'Search') {
         $pst = consultBookName($_GET['cpSearch']);
@@ -89,7 +86,7 @@ if (!empty($_GET)) {
                         <div class="card-content">
 
                             <div class="row">
-                                <div class="col s9">
+                                <div class="col s10">
                                     <?php
                                     if ($card['estado'] == 'D') {
                                     ?>
@@ -104,16 +101,17 @@ if (!empty($_GET)) {
                                     ?>
                                 </div>
                                 <!-- Dropdown Trigger -->
-                                <div class="col s3">
-                                    <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
+                                <div class="col s1">
+                                    <a class='dropdown-trigger' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
                                     <!-- Dropdown Structure -->
                                     <ul id='dropdown1' class='dropdown-content'>
-                                        <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
+                                        <li><a href="#"><i class="material-icons right red35">create</i></a></li>
                                         <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
                                         <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
                                     </ul>
                                 </div>
                             </div>
+
 
                             <span class="card-title activator grey-text text-darken-4"><?= $card['nomeLivro'] ?>
                             </span>

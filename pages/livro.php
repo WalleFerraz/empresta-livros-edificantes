@@ -79,39 +79,52 @@ if (!empty($_GET)) {
         ?>
 
                 <div class="col s2">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src=<?=$card['imagem']?>></img>
-                            <!-- Dropdown Trigger -->
-                            <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
-
-                            <!-- Dropdown Structure -->
-                            <ul id='dropdown1' class='dropdown-content'>
-                                <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
-                                <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
-                                <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
-                            </ul>
+                    <!-- Início do cartão -->
+                    <div class="medium card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src=<?= $card['imagem'] ?>></img>
                         </div>
+
+                        <!-- Conteúdo do cartão -->
                         <div class="card-content">
-                            <span class="card-title"><?= $card['nomeLivro'] ?></span>
 
-                            <?php
-                            if ($card['estado'] == 'D') {
-                            ?>
+                            <div class="row">
+                                <div class="col s9">
+                                    <?php
+                                    if ($card['estado'] == 'D') {
+                                    ?>
+                                        <p class="green lighten-1"><?= $estado ?></p>
+                                    <?php
+                                    } //if
+                                    else {
+                                    ?>
+                                        <p class="red lighten-1"><?= $estado ?></p>
+                                    <?php
+                                    } //else
+                                    ?>
+                                </div>
+                                <!-- Dropdown Trigger -->
+                                <div class="col s3">
+                                    <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
+                                    <!-- Dropdown Structure -->
+                                    <ul id='dropdown1' class='dropdown-content'>
+                                        <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
+                                        <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
+                                        <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                                <p class="green lighten-1"><?= $estado ?></p>
+                            <span class="card-title activator grey-text text-darken-4"><?= $card['nomeLivro'] ?>
+                            </span>
+                        </div>
 
-                            <?php
-                            } //if
-                            else {
-                            ?>
-
-                                <p class="red lighten-1"><?= $estado ?></p>
-
-                            <?php
-                            } //else
-                            ?>
-                            <p><?= $card['autor'] ?>, <?= $card['categoria'] ?>, <?= $card['publicoIndicado'] ?>, <?= $card['numeroPaginas'] ?> páginas</p>
+                        <!-- Início do cartão revelado -->
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"><?= $card['nomeLivro'] ?><i class="material-icons right">close</i></span>
+                            <p>
+                                <?= $card['autor'] ?>, <?= $card['categoria'] ?>, <?= $card['publicoIndicado'] ?>, <?= $card['numeroPaginas'] ?> páginas
+                            </p>
                         </div>
                     </div>
                 </div>

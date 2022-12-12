@@ -1,20 +1,31 @@
 <?php
-require '../function/insertBook.php';
+require_once '../function/consultBookId.php';    
+
+
+session_start();
+$_SESSION['id'] = $_GET['codigo'];
+
+$pst = consultBookId($_SESSION['id']);
+$vet = $pst->fetchAll(PDO::FETCH_ASSOC);
 
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
-        //insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico, $imagem)
-        insertBook(
+        //updateBook($id, $nome, $autor, $descricao, $categoria, $paginas, $publico, $estado, $imagem)
+        require_once '../function/updateBook.php';
+        updateBook(
+            $_SESSION['id'],
             $_GET['cpTitle'],
             $_GET['cpAuthor'],
             $_GET['cpDescription'],
             $_GET['cpCategory'],
             $_GET['cpPages'],
             $_GET['cpPublic'],
-            $_GET['cpPhoto']
+            $_GET['cpEstado'],
+            $_GET['cpWay']
         );
     }
 }
+
 ?>
 
 
@@ -101,16 +112,21 @@ if (!empty($_GET['action'])) {
                         <textarea name="cpDescription" id="textarea" class="materialize-textarea"></textarea>
                         <label for="textarea">Descrição do livro...</label>
                     </div>
-                    <div class="col s4">
-                        <div class="file-field input-field">
-                            <i class="material-icons left red35 small">insert_photo</i>
-                            <input name="cpPhoto" type="file">
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
+                    <div class="col s3">
+                        <input name="cpWay" type="text">
+                    </div>
+                    <div class="col1">
+                        <div class="switch">
+                            <label>
+                                Indisponível
+                                <input name="cpEstado" type="checkbox">
+                                <span class="lever"></span>
+                                Disponível
+                            </label>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
@@ -118,6 +134,7 @@ if (!empty($_GET['action'])) {
             </form>
         </div>
     </div>
+
 
 
     <footer class="page-footer">

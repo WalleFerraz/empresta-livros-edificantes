@@ -81,7 +81,7 @@ if (!empty($_GET)) {
                 <div class="col s2">
                     <div class="card">
                         <div class="card-image">
-                            <img src="../images/imagens-apontadas-pelo-banco/imagem1.jpg"></img>
+                            <img src=<?=$card['imagem']?>></img>
                             <!-- Dropdown Trigger -->
                             <a class='drop  down-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
 

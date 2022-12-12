@@ -1,8 +1,6 @@
 <?php
 require '../function/insertBook.php';
 
-var_dump($_GET);
-
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
         //insertBook($nome, $autor, $descricao, $categoria, $paginas, $publico, $imagem)
@@ -61,7 +59,7 @@ if (!empty($_GET['action'])) {
             Cadastrar um novo livro
         </h4>
         <div class="row">
-            <form class="col s12" enctype="multipart/form-data">
+            <form class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
                         <input name="cpTitle" id="book_name" type="text" class="validate">
@@ -105,7 +103,7 @@ if (!empty($_GET['action'])) {
                         <label for="textarea">Descrição do livro...</label>
                     </div>
                     <div class="col s4">
-                        <input name="cpWay" type="file">
+                        <input name="cpWay" type="text">
                     </div>
                 </div>
 

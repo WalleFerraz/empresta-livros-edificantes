@@ -89,7 +89,7 @@ if (!empty($_GET)) {
                             
                             <td>
                                 <!-- Dropdown Trigger -->
-                                <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Edição</a>
+                                <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
 
                                 <!-- Dropdown Structure -->
                                 <ul id='dropdown1' class='dropdown-content'>

@@ -1,9 +1,6 @@
 <?php
 require '../function/consultBookName.php';
 
-//$pst = fullSearch();
-//$rs = $pst -> fetchAll(PDO::FETCH_ASSOC);
-
 if (!empty($_GET)) {
     if ($_GET['action'] == 'Search') {
         $pst = consultBookName($_GET['cpSearch']);
@@ -70,7 +67,7 @@ if (!empty($_GET)) {
         <?php
         if (!empty($_GET)) {
             foreach ($vet as $card) {
-                if ($card['estado'] == 'D') {
+                if ($card['estado'] == '1') {
                     $estado = 'Diponível';
                 } //if
                 else {
@@ -91,7 +88,7 @@ if (!empty($_GET)) {
                             <div class="row">
                                 <div class="col s9">
                                     <?php
-                                    if ($card['estado'] == 'D') {
+                                    if ($card['estado'] == '1') {
                                     ?>
                                         <p class="green lighten-1"><?= $estado ?></p>
                                     <?php
@@ -103,17 +100,12 @@ if (!empty($_GET)) {
                                     } //else
                                     ?>
                                 </div>
-                                <!-- Dropdown Trigger -->
+
                                 <div class="col s3">
-                                    <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
-                                    <!-- Dropdown Structure -->
-                                    <ul id='dropdown1' class='dropdown-content'>
-                                        <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
-                                        <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
-                                        <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
-                                    </ul>
+                                    <a class="button" value="Edit" type="submit" href="editarLivro.php?codigo=<?=$card['id']?>"><i class="material-icons right red35">create</i></a></li>
                                 </div>
                             </div>
+
 
                             <span class="card-title activator grey-text text-darken-4"><?= $card['nomeLivro'] ?>
                             </span>

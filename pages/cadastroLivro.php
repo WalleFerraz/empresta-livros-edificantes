@@ -74,21 +74,21 @@ if (!empty($_GET['action'])) {
                     <div class="input-field col s5">
                         <select name="cpCategory">
                             <option value="" disabled selected>Categoria</option>
-                            <option value="1">Meditação</option>
-                            <option value="2">História</option>
-                            <option value="3">Estudo</option>
-                            <option value="4">Conhecimento da Igreja</option>
-                            <option value="5">Biografia</option>
+                            <option value="Meditação">Meditação</option>
+                            <option value="História">História</option>
+                            <option value="Estudo">Estudo</option>
+                            <option value="Conhecimento da Igreja">Conhecimento da Igreja</option>
+                            <option value="Biografia">Biografia</option>
                         </select>
                     </div>
                     <div class="input-field col s5">
                         <select name="cpPublic">
                             <option value="" disabled selected>Público indicado</option>
-                            <option value="1">Criança</option>
-                            <option value="2">Jovem</option>
-                            <option value="3">Adulto</option>
-                            <option value="4">Namorados</option>
-                            <option value="5">Casados</option>
+                            <option value="Criança">Criança</option>
+                            <option value="Jovem">Jovem</option>
+                            <option value="Adulto">Adulto</option>
+                            <option value="Namorados">Namorados</option>
+                            <option value="Casados">Casados</option>
                         </select>
                     </div>
                     <div class="input-field col s2">

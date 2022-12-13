@@ -1,12 +1,15 @@
 <?php
-require_once '../function/consultBookId.php';    
-
 
 session_start();
-$_SESSION['id'] = $_GET['codigo'];
 
-$pst = consultBookId($_SESSION['id']);
-$vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+if (count($_GET) == 1) {
+    $_SESSION['id'] = $_GET['codigo'];
+    require_once '../function/consultBookId.php';
+    $pst = consultBookId($_SESSION['id']);
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['conteudo'] = $vet;
+}
+
 
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
@@ -23,6 +26,7 @@ if (!empty($_GET['action'])) {
             $_GET['cpEstado'],
             $_GET['cpWay']
         );
+        //header('Location: livro.php');
     }
 }
 
@@ -66,17 +70,17 @@ if (!empty($_GET['action'])) {
     <!-- Cadastro de livro -->
     <div class="center middle-box">
         <h4>
-            Cadastrar um novo livro
+            Edição de livro
         </h4>
         <div class="row">
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="cpTitle" id="book_name" type="text" class="validate">
+                        <input name="cpTitle" value="<?= $_SESSION['conteudo'][0]['nomeLivro'] ?>" id="book_name" type="text" class="validate">
                         <label for="book_name">Título do livro</label>
                     </div>
                     <div class="input-field col s6">
-                        <input name="cpAuthor" id="author_name" type="text" class="validate">
+                        <input name="cpAuthor" value="<?= $_SESSION['conteudo'][0]['autor'] ?>" id="author_name" type="text" class="validate">
                         <label for="author_name">Autor(a) do livro</label>
                     </div>
                 </div>
@@ -84,50 +88,48 @@ if (!empty($_GET['action'])) {
                     <div class="input-field col s5">
                         <select name="cpCategory">
                             <option value="" disabled selected>Categoria</option>
-                            <option value="1">Meditação</option>
-                            <option value="2">História</option>
-                            <option value="3">Estudo</option>
-                            <option value="4">Conhecimento da Igreja</option>
-                            <option value="5">Biografia</option>
+                            <option value="Meditação">Meditação</option>
+                            <option value="História">História</option>
+                            <option value="Estudo">Estudo</option>
+                            <option value="Conhecimento da Igreja">Conhecimento da Igreja</option>
+                            <option value="Biografia">Biografia</option>
                         </select>
                     </div>
                     <div class="input-field col s5">
                         <select name="cpPublic">
                             <option value="" disabled selected>Público indicado</option>
-                            <option value="1">Criança</option>
-                            <option value="2">Jovem</option>
-                            <option value="3">Adulto</option>
-                            <option value="4">Namorados</option>
-                            <option value="5">Casados</option>
+                            <option value="Criança">Criança</option>
+                            <option value="Jovem">Jovem</option>
+                            <option value="Adulto">Adulto</option>
+                            <option value="Namorados">Namorados</option>
+                            <option value="Casados">Casados</option>
                         </select>
                     </div>
                     <div class="input-field col s2">
-                        <input name="cpPages" id="number_pages" type="number" class="validate">
+                        <input name="cpPages" value="<?= $_SESSION['conteudo'][0]['numeroPaginas'] ?>" id="number_pages" type="number" class="validate">
                         <label for="number_pages">Páginas</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s8">
-                        <textarea name="cpDescription" id="textarea" class="materialize-textarea"></textarea>
+                        <input name="cpDescription" value="<?= $_SESSION['conteudo'][0]['descricaoLivro'] ?>" id="textarea" type="text" class="validate">
                         <label for="textarea">Descrição do livro...</label>
                     </div>
                     <div class="col s3">
-                        <input name="cpWay" type="text">
+                        <input name="cpWay" value="<?= $_SESSION['conteudo'][0]['imagem'] ?>" type="text">
                     </div>
-                    <div class="col1">
-                        <div class="switch">
-                            <label>
-                                Indisponível
-                                <input name="cpEstado" type="checkbox">
-                                <span class="lever"></span>
-                                Disponível
-                            </label>
-                        </div>
+                    <div class="input-field col s3">
+                        <select name="cpEstado">
+                            <option value="" disabled selected>Estado</option>
+                            <option value="1">Disponível</option>
+                            <option value="0">Indisponível</option>
+                        </select>
                     </div>
                 </div>
 
-
+                
+                <!-- Botão de salvar -->
                 <div class="row">
                     <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
                 </div>

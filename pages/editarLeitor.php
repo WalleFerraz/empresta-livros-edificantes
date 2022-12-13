@@ -1,16 +1,33 @@
 <?php
-require '../function/insertReader.php';
+session_start();
+
+if (count($_GET) == 1) {
+    $_SESSION['id'] = $_GET['codigo'];
+    require_once '../function/consultReaderId.php';
+    $pst = consultReaderId($_SESSION['id']);
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['conteudo'] = $vet;
+}
 
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
-        //insertReader($nome, $sobrenome, $numero, $email)
-        insertReader(
+        //updateReader($id, $nome, $sobrenome, $numero, $email)
+        require_once '../function/updateReader.php';
+        updateReader(
+            $_SESSION['id'],
             $_GET['cpName'],
             $_GET['cpLastName'],
             $_GET['cpPhone'],
             $_GET['cpEmail']
         );
-    }
+        header('Location: leitor.php');
+    } //if
+
+    else if ($_GET['action'] == 'Delete') {
+        require_once '../function/deleteReader.php';
+        deleteReader($_SESSION['id']);
+        header('Location: leitor.php');
+    } //else if
 }
 ?>
 
@@ -19,11 +36,12 @@ if (!empty($_GET['action'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de um novo leitor</title>
+    <title>Edição de leitor</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" href="../images/nsa-para-logo-removebg.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
@@ -49,31 +67,37 @@ if (!empty($_GET['action'])) {
     <!-- Cadastro de leitor -->
     <div class="center middle-box">
         <h4>
-            Cadastrar um novo leitor
+            Edição de leitor
         </h4>
         <div class="row">
             <form>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="cpName" id="first_name" type="text" class="validate">
+                        <input value="<?= $_SESSION['conteudo'][0]['nomeLeitor'] ?>" name="cpName" id="first_name" type="text" class="validate">
                         <label for="first_name">Nome</label>
                     </div>
                     <div class="input-field col s6">
-                        <input name="cpLastName" id="last_name" type="text" class="validate">
+                        <input value="<?= $_SESSION['conteudo'][0]['sobrenomeLeitor'] ?>" name="cpLastName" id="last_name" type="text" class="validate">
                         <label for="last_name">Sobrenome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="cpEmail" id="email" type="email" class="validate">
+                        <input value="<?= $_SESSION['conteudo'][0]['email'] ?>" name="cpEmail" id="email" type="email" class="validate">
                         <label for="email">E-mail</label>
                     </div>
                     <div class="input-field col s6">
-                        <input name="cpPhone" id="phone" type="tel" class="validate">
+                        <input value="<?= $_SESSION['conteudo'][0]['numeroCelular'] ?>" name="cpPhone" id="phone" type="tel" class="validate">
                         <label for="phone">Número de celular</label>
                     </div>
                 </div>
+
+
+                <!-- Botões de excluir e salvar respectivamente -->
                 <div class="row">
+                    <div class="col s3 m3">
+                        <button class="btn waves-effect waves-light red" type="submit" name="action" value="Delete">Excluir<i class="material-icons left">delete</i></button>
+                    </div>
                     <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
                 </div>
             </form>

@@ -38,12 +38,22 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="row middle-box center">
         <div class="col s4 center">
-            <h3><?=$vet[0]['quantidade']?></h3>
+            <h3><?= $vet[0]['quantidade'] ?></h3>
             <p>Livros guardados</p>
         </div>
+
         <div class="col s4 offset-s4 center">
-            <h3><?=$vet[1]['quantidade']?></h3>
+            <!-- PHP -->
+            <?php
+            if (count($vet) == 2) {
+                echo '<h3><?=$vet[1]["quantidade"]?></h3>';
+            } //if
+            else {
+                echo '<h3>0</h3>';
+            } //else
+            ?>
             <p>Livros emprestados</p>
+
         </div>
     </div>
 

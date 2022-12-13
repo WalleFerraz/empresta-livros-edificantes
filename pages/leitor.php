@@ -86,17 +86,9 @@ if (!empty($_GET)) {
                             <td><?= $line['sobrenomeLeitor'] ?></td>
                             <td><?= $line['numeroCelular'] ?></td>
                             <td><?= $line['email'] ?></td>
-                            
-                            <td>
-                                <!-- Dropdown Trigger -->
-                                <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons right red35">more_vert</i></a>
 
-                                <!-- Dropdown Structure -->
-                                <ul id='dropdown1' class='dropdown-content'>
-                                    <li><a href="#!"><i class="material-icons right red35">create</i></a></li>
-                                    <li><a href="#!"><i class="material-icons right red35">delete</i></a></li>
-                                    <li><a href="#!"><i class="material-icons right red35">remove_red_eye</i></a></li>
-                                </ul>
+                            <td>
+                                <a class="button" value="Edit" type="submit" href="editarLeitor.php?codigo=<?= $line['id'] ?>"><i class="material-icons right red35">create</i></a></li>
                             </td>
                         </tr>
 

@@ -39,7 +39,7 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
     <div class="row middle-box center">
         <div class="col s4 center">
             <h3><?= $vet[0]['quantidade'] ?></h3>
-            <p>Livros guardados</p>
+            <p>Livros disponíveis</p>
         </div>
 
         <div class="col s4 offset-s4 center">
@@ -52,7 +52,7 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
                 echo '<h3>0</h3>';
             } //else
             ?>
-            <p>Livros emprestados</p>
+            <p>Livros indisponíveis</p>
 
         </div>
     </div>

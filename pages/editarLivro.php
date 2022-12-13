@@ -26,8 +26,14 @@ if (!empty($_GET['action'])) {
             $_GET['cpEstado'],
             $_GET['cpWay']
         );
-        //header('Location: livro.php');
-    }
+        header('Location: livro.php');
+    }//if
+
+    else if ($_GET['action'] == 'Delete'){
+        require_once '../function/deleteBook.php';
+        deleteBook($_SESSION['id']);
+        header('Location: livro.php');
+    }//else if
 }
 
 ?>
@@ -128,9 +134,12 @@ if (!empty($_GET['action'])) {
                     </div>
                 </div>
 
-                
-                <!-- Botão de salvar -->
+
+                <!-- Botões de excluir e salvar respectivamente -->
                 <div class="row">
+                    <div class="col s3 m3">
+                        <button class="btn waves-effect waves-light red" type="submit" name="action" value="Delete">Excluir<i class="material-icons left">delete</i></button>
+                    </div>
                     <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
                 </div>
             </form>

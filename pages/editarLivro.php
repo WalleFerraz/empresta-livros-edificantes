@@ -43,7 +43,7 @@ if (!empty($_GET['action'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de um novo livro</title>
+    <title>Edição de livro</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/styles.css">

@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
         require '../function/insertBook.php';
@@ -70,13 +67,37 @@ else {
                     <div class="input-field col s6">
                         <select name="cpLeitor">
                             <option value="" disabled selected>Leitor</option>
-                            <option value="<?= $vet2[0]['id'] ?>"><?= $vet2[0]['nomeCompleto'] ?></option>
+
+
+                            <!-- PHP -->
+                            <?php
+                            foreach ($vet2 as $line2) {
+                            ?>
+
+                                <option value="<?= $line2['id'] ?>"><?= $line2['nomeCompleto'] ?></option>
+
+                                <!-- PHP -->
+                            <?php
+                            } //foreach
+                            ?>
                         </select>
                     </div>
                     <div class="input-field col s6">
                         <select name="cpLivro">
                             <option value="" disabled selected>Livro</option>
-                            <option value="<?=$vet1[0]['id']?>"><?=$vet1[0]['nomeLivro']?></option>
+
+
+                            <!-- PHP -->
+                            <?php
+                            foreach ($vet1 as $line1) {
+                            ?>
+                                <option value="<?= $line1['id'] ?>"><?= $line1['nomeLivro'] ?></option>
+
+                            <?php
+                            } //foreach
+                            ?>
+
+
                         </select>
                     </div>
                 </div>
@@ -110,9 +131,32 @@ else {
             $('select').formSelect()
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, options);
+        //Date Picker
+        var diaSemana = ['Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'];
+        var mesAno = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        var data = new Date();
+        var hoje = diaSemana[data.getDay()] + ', ' + mesAno[data.getMonth()] + ' de ' + data.getFullYear();
+        $("#dataPesquisa").attr("value", hoje);
+        $(".datepicker").pickadate({
+            monthsFull: mesAno,
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            weekdaysFull: diaSemana,
+            weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+            weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            selectMonths: true,
+            selectYears: true,
+            clear: false,
+            format: 'dddd/mm/yyyy',
+            today: "Hoje",
+            close: "Limpar",
+            min: new Date(data.getFullYear() - 1, 0, 1),
+            max: new Date(data.getFullYear() + 1, 11, 31),
+            closeOnSelect: true
+        });
+
+        $("#dataPesquisa").click(function(event) {
+            event.stopPropagation();
+            $(".datepicker").first().pickadate("picker").open();
         });
     </script>
 </body>

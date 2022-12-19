@@ -31,6 +31,7 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
+                <li><a href="cadastroEmprestimo.php">Cadastrar Empréstimo</a></li>
             </ul>
         </div>
     </nav>
@@ -41,12 +42,19 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
             <!-- PHP -->
             <?php
             if (count($vet) >= 1) {
-                echo '<h3><?= $vet[0]["quantidade"] ?></h3>';
+            ?>
+
+
+                <h3><?= $vet[0]["quantidade"] ?></h3>
+
+
+            <?php
             } //if
             else {
                 echo '<h3>0</h3>';
             } //else
             ?>
+
             <p>Livros disponíveis</p>
         </div>
 
@@ -54,7 +62,13 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
             <!-- PHP -->
             <?php
             if (count($vet) == 2) {
-                echo '<h3><?=$vet[1]["quantidade"]?></h3>';
+            ?>
+
+
+                <h3><?= $vet[1]["quantidade"] ?></h3>
+
+
+            <?php
             } //if
             else {
                 echo '<h3>0</h3>';

@@ -42,6 +42,7 @@ if (!empty($_GET['action'])) {
                 <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar livro</a></li>
+                <li><a href="cadastroEmprestimo.php">Cadastrar Empréstimo</a></li>
             </ul>
         </div>
     </nav>

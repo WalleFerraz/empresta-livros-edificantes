@@ -2,7 +2,7 @@
 
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'Save') {
-        require '../function/insertBook.php';
+        require '../function/insertLoan.php';
         //insertLoan($idLivro, $idLeitor, $devolucao)
         insertLoan(
             $_GET['cpLeitor'],
@@ -52,6 +52,7 @@ else {
                 <li><a href="leitor.php">Leitores</a></li>
                 <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
                 <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
+                <li><a href="cadastroEmprestimo.php">Cadastrar Empréstimo</a></li>
             </ul>
         </div>
     </nav>
@@ -103,7 +104,8 @@ else {
                 </div>
                 <div class="row">
                     <div class="input-field col s5">
-                        <input name="cpDevolucao" type="text" class="datepicker">
+                        <input id="devolucao" name="cpDevolucao" type="date">
+                        <label for="devolucao">Data de devolução</label>
                     </div>
 
 
@@ -131,11 +133,18 @@ else {
             $('select').formSelect()
         });
 
+
+        /*.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, options);
+        });*/
+
         //Date Picker
         var diaSemana = ['Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'];
         var mesAno = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         var data = new Date();
         var hoje = diaSemana[data.getDay()] + ', ' + mesAno[data.getMonth()] + ' de ' + data.getFullYear();
+
         $("#dataPesquisa").attr("value", hoje);
         $(".datepicker").pickadate({
             monthsFull: mesAno,
@@ -145,8 +154,8 @@ else {
             weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
             selectMonths: true,
             selectYears: true,
-            clear: false,
-            format: 'dddd/mm/yyyy',
+            clear: true,
+            format: 'yyyy/mm/dd',
             today: "Hoje",
             close: "Limpar",
             min: new Date(data.getFullYear() - 1, 0, 1),

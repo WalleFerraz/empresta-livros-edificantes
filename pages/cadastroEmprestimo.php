@@ -1,16 +1,19 @@
 <?php
 
-if (!empty($_GET['action'])) {
-    if ($_GET['action'] == 'Save') {
-        require '../function/insertLoan.php';
-        //insertLoan($idLivro, $idLeitor, $devolucao)
-        insertLoan(
-            $_GET['cpLeitor'],
-            $_GET['cpLivro'],
-            $_GET['cpDevolucao']
-        );
-    }
-} //else
+if (!empty($_GET)) {
+    require '../function/insertLoan.php';
+    //insertLoan($idLivro, $idLeitor, $devolucao)
+    insertLoan(
+        $_GET['cpLivro'],
+        $_GET['cpLeitor'],
+        $_GET['cpDevolucao']
+    );
+
+    //updateBookEstado($id, $estado)
+    updateBookEstado($_GET['cpLivro'], '0');
+    header('Location:cadastroEmprestimo.php');
+} //if
+
 else {
     require '../function/consultBROrderCres.php';
     $pst1 = consultBookOrderCres();
@@ -110,7 +113,7 @@ else {
 
 
                     <div class="row">
-                        <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Salvar</button>
+                        <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Save">Emprestar</button>
                     </div>
                 </div>
             </form>
@@ -131,41 +134,6 @@ else {
         M.AutoInit();
         $(document).ready(function() {
             $('select').formSelect()
-        });
-
-
-        /*.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, options);
-        });*/
-
-        //Date Picker
-        var diaSemana = ['Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'];
-        var mesAno = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        var data = new Date();
-        var hoje = diaSemana[data.getDay()] + ', ' + mesAno[data.getMonth()] + ' de ' + data.getFullYear();
-
-        $("#dataPesquisa").attr("value", hoje);
-        $(".datepicker").pickadate({
-            monthsFull: mesAno,
-            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            weekdaysFull: diaSemana,
-            weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-            weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-            selectMonths: true,
-            selectYears: true,
-            clear: true,
-            format: 'yyyy/mm/dd',
-            today: "Hoje",
-            close: "Limpar",
-            min: new Date(data.getFullYear() - 1, 0, 1),
-            max: new Date(data.getFullYear() + 1, 11, 31),
-            closeOnSelect: true
-        });
-
-        $("#dataPesquisa").click(function(event) {
-            event.stopPropagation();
-            $(".datepicker").first().pickadate("picker").open();
         });
     </script>
 </body>

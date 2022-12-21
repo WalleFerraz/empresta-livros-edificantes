@@ -1,11 +1,16 @@
 <?php
-require '../function/consultReaderName.php';
+require '../function/consultReader.php';
 if (!empty($_GET)) {
     if ($_GET['action']) {
         $pst = consultReaderName($_GET['cpSearch']);
         $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
     }
-}
+}//if
+
+else{
+    $pst = consultReader();
+    $vet = $pst -> fetchAll(PDO::FETCH_ASSOC);
+}//else
 ?>
 
 
@@ -77,25 +82,23 @@ if (!empty($_GET)) {
                 </head>
 
                 <?php
-                if (!empty($_GET)) {
-                    foreach ($vet as $line) {
+                foreach ($vet as $line) {
                 ?>
 
-                        <tr>
-                            <td><?= $line['id'] ?></td>
-                            <td><?= $line['nomeLeitor'] ?></td>
-                            <td><?= $line['sobrenomeLeitor'] ?></td>
-                            <td><?= $line['numeroCelular'] ?></td>
-                            <td><?= $line['email'] ?></td>
+                    <tr>
+                        <td><?= $line['id'] ?></td>
+                        <td><?= $line['nomeLeitor'] ?></td>
+                        <td><?= $line['sobrenomeLeitor'] ?></td>
+                        <td><?= $line['numeroCelular'] ?></td>
+                        <td><?= $line['email'] ?></td>
 
-                            <td>
-                                <a class="button" value="Edit" type="submit" href="editarLeitor.php?codigo=<?= $line['id'] ?>"><i class="material-icons right red35">create</i></a></li>
-                            </td>
-                        </tr>
+                        <td>
+                            <a class="button" value="Edit" type="submit" href="editarLeitor.php?codigo=<?= $line['id'] ?>"><i class="material-icons right red35">create</i></a></li>
+                        </td>
+                    </tr>
 
                 <?php
-                    } //foreach
-                } //if
+                } //foreach
                 ?>
             </table>
         </div>

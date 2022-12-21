@@ -55,7 +55,7 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
             } //else
             ?>
 
-            <p>Livros disponíveis</p>
+            <a href="livrosDisponiveis.php">Livros disponíveis</a>
         </div>
 
         <div class="col s4 offset-s4 center">
@@ -74,7 +74,7 @@ $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
                 echo '<h3>0</h3>';
             } //else
             ?>
-            <p>Livros indisponíveis</p>
+            <a  href="livrosIndisponiveis.php">Livros indisponíveis</a>
 
         </div>
     </div>

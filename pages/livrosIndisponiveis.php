@@ -1,24 +1,23 @@
 <?php
-require '../function/consultReader.php';
-if (!empty($_GET)) {
-    if ($_GET['action']) {
-        $pst = consultReaderName($_GET['cpSearch']);
-        $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
-    }
-}//if
+require '../function/consultLoan.php';
 
-else{
-    $pst = consultReader();
-    $vet = $pst -> fetchAll(PDO::FETCH_ASSOC);
-}//else
+if (!empty($_GET)) {
+    $pst = consultLoanReader($_GET['cpSearch']);
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+} //if
+else {
+    $pst = consultLoan();
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+} //else
 ?>
+
 
 
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>Livros</title>
+    <title>Livros indisponíveis</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -50,18 +49,19 @@ else{
 
     <!-- Campo de busca -->
     <div class="center middle-box">
-        <form>
-            <div class="row">
+        <h4>Livros Indisponíveis</h4>
+        <div class="row">
+            <form>
                 <div class="input-field col s12">
                     <i class="material-icons small right">search</i>
                     <input name="cpSearch" id="title" type="text" class="validate">
-                    <label for="title">Pesquisar leitor</label>
+                    <label for="title">Pesquisar pelo nome do leitor</label>
                 </div>
-            </div>
-            <!-- Botão de buscar -->
-            <div class="row">
-                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Search">Buscar</button>
-            </div>
+        </div>
+        <!-- Botão de buscar -->
+        <div class="row">
+            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Search">Buscar</button>
+        </div>
         </form>
     </div>
 
@@ -77,7 +77,10 @@ else{
                         <th>Sobrenome</th>
                         <th>Número de celular</th>
                         <th>E-mail</th>
-                        <td></td>
+                        <th>Título do livro</th>
+                        <th>Empréstimo</th>
+                        <th>Devolução</th>
+                        <th></th>
                     </tr>
                 </head>
 
@@ -91,10 +94,17 @@ else{
                         <td><?= $line['sobrenomeLeitor'] ?></td>
                         <td><?= $line['numeroCelular'] ?></td>
                         <td><?= $line['email'] ?></td>
+                        <td><?= $line['nomeLivro'] ?></td>
+                        <td><?= $line['dataEmprestimo'] ?></td>
+                        <td><?= $line['dataDevolucao'] ?></td>
 
-                        <td>
-                            <a class="button" value="Edit" type="submit" href="editarLeitor.php?codigo=<?= $line['id'] ?>"><i class="material-icons right red35">create</i></a></li>
-                        </td>
+                        <!-- PHP -->
+                        <?php
+                        if ($line['dataDevolucao'] < date('Y-m-d')) {
+                            echo '<td><p class="red lighten-1">Vencido</p></td>';
+                        } //if
+                        ?>
+
                     </tr>
 
                 <?php
@@ -114,16 +124,6 @@ else{
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var drop = document.querySelectorAll('.dropdown-trigger');
-            M.Dropdown.init(drop, {
-                coverTrigger: false,
-                constrainWidth: false
-            });
-        });
-    </script>
 
 </body>
 

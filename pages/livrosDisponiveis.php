@@ -2,16 +2,14 @@
 require '../function/consultBook.php';
 
 if (!empty($_GET)) {
-    if ($_GET['action'] == 'Search') {
-        $pst = consultBookName($_GET['cpSearch']);
-        $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $pst = consultBookEstadoName($_GET['cpSearch']);
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
 } //if
 
-else {
-    $pst = consultBook();
-    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
-} //else
+else{
+    $pst = consultBookEstado();
+        $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
 
@@ -71,13 +69,13 @@ else {
 
     <div class="row">
         <?php
+        if (!empty){
+
+        }
         foreach ($vet as $card) {
             if ($card['estado'] == '1') {
                 $estado = 'Diponível';
             } //if
-            else {
-                $estado = 'Indisponível';
-            } //else
         ?>
 
             <div class="col s2">
@@ -92,18 +90,7 @@ else {
 
                         <div class="row">
                             <div class="col s9">
-                                <?php
-                                if ($card['estado'] == '1') {
-                                ?>
-                                    <p class="green lighten-1"><?= $estado ?></p>
-                                <?php
-                                } //if
-                                else {
-                                ?>
-                                    <p class="red lighten-1"><?= $estado ?></p>
-                                <?php
-                                } //else
-                                ?>
+                                <p class="green lighten-1"><?= $estado ?></p>
                             </div>
 
                             <div class="col s3">

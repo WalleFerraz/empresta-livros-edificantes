@@ -1,12 +1,17 @@
 <?php
-require '../function/consultBookName.php';
+require '../function/consultBook.php';
 
 if (!empty($_GET)) {
     if ($_GET['action'] == 'Search') {
         $pst = consultBookName($_GET['cpSearch']);
         $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
     }
-}
+} //if
+
+else {
+    $pst = consultBook();
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+} //else
 ?>
 
 
@@ -66,66 +71,63 @@ if (!empty($_GET)) {
 
     <div class="row">
         <?php
-        if (!empty($_GET)) {
-            foreach ($vet as $card) {
-                if ($card['estado'] == '1') {
-                    $estado = 'Diponível';
-                } //if
-                else {
-                    $estado = 'Indisponível';
-                } //else
+        foreach ($vet as $card) {
+            if ($card['estado'] == '1') {
+                $estado = 'Diponível';
+            } //if
+            else {
+                $estado = 'Indisponível';
+            } //else
         ?>
 
-                <div class="col s2">
-                    <!-- Início do cartão -->
-                    <div class="medium card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src=<?= $card['imagem'] ?>></img>
-                        </div>
+            <div class="col s2">
+                <!-- Início do cartão -->
+                <div class="medium card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src=<?= $card['imagem'] ?>></img>
+                    </div>
 
-                        <!-- Conteúdo do cartão -->
-                        <div class="card-content">
+                    <!-- Conteúdo do cartão -->
+                    <div class="card-content">
 
-                            <div class="row">
-                                <div class="col s9">
-                                    <?php
-                                    if ($card['estado'] == '1') {
-                                    ?>
-                                        <p class="green lighten-1"><?= $estado ?></p>
-                                    <?php
-                                    } //if
-                                    else {
-                                    ?>
-                                        <p class="red lighten-1"><?= $estado ?></p>
-                                    <?php
-                                    } //else
-                                    ?>
-                                </div>
-
-                                <div class="col s3">
-                                    <a class="button" value="Edit" type="submit" href="editarLivro.php?codigo=<?=$card['id']?>"><i class="material-icons right red35">create</i></a></li>
-                                </div>
+                        <div class="row">
+                            <div class="col s9">
+                                <?php
+                                if ($card['estado'] == '1') {
+                                ?>
+                                    <p class="green lighten-1"><?= $estado ?></p>
+                                <?php
+                                } //if
+                                else {
+                                ?>
+                                    <p class="red lighten-1"><?= $estado ?></p>
+                                <?php
+                                } //else
+                                ?>
                             </div>
 
-
-                            <span class="card-title activator grey-text text-darken-4"><?= $card['nomeLivro'] ?>
-                            </span>
+                            <div class="col s3">
+                                <a class="button" value="Edit" type="submit" href="editarLivro.php?codigo=<?= $card['id'] ?>"><i class="material-icons right red35">create</i></a></li>
+                            </div>
                         </div>
 
-                        <!-- Início do cartão revelado -->
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4"><?= $card['nomeLivro'] ?><i class="material-icons right">close</i></span>
-                            <p>
-                                <?= $card['autor'] ?>, <?= $card['categoria'] ?>, <?= $card['publicoIndicado'] ?>, <?= $card['numeroPaginas'] ?> páginas
-                            </p>
-                        </div>
+
+                        <span class="card-title activator grey-text text-darken-4"><?= $card['nomeLivro'] ?>
+                        </span>
+                    </div>
+
+                    <!-- Início do cartão revelado -->
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><?= $card['nomeLivro'] ?><i class="material-icons right">close</i></span>
+                        <p>
+                            <?= $card['autor'] ?>, <?= $card['categoria'] ?>, <?= $card['publicoIndicado'] ?>, <?= $card['numeroPaginas'] ?> páginas
+                        </p>
                     </div>
                 </div>
+            </div>
 
         <?php
-            } //foreach
-        } //if
-
+        } //foreach
         ?>
     </div>
 

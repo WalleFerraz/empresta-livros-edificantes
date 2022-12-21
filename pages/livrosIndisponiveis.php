@@ -1,0 +1,130 @@
+<?php
+require '../function/consultLoan.php';
+
+if (!empty($_GET)) {
+    $pst = consultLoanReader($_GET['cpSearch']);
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+} //if
+else {
+    $pst = consultLoan();
+    $vet = $pst->fetchAll(PDO::FETCH_ASSOC);
+} //else
+?>
+
+
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Livros indisponíveis</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../images/nsa-para-logo-removebg.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+
+            <a href="../pages/home.php">
+                <img src="../images/logo-empresta-livro.png" alt="Logo do site empresta livro" class="logoSize">
+            </a>
+            <!-- header -->
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="livro.php">Livros</a></li>
+                <li><a href="leitor.php">Leitores</a></li>
+                <li><a href="cadastroLeitor.php">Cadastrar Leitor</a></li>
+                <li><a href="cadastroLivro.php">Cadastrar Livro</a></li>
+                <li><a href="cadastroEmprestimo.php">Cadastrar Empréstimo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Campo de busca -->
+    <div class="center middle-box">
+        <h4>Livros Indisponíveis</h4>
+        <div class="row">
+            <form>
+                <div class="input-field col s12">
+                    <i class="material-icons small right">search</i>
+                    <input name="cpSearch" id="title" type="text" class="validate">
+                    <label for="title">Pesquisar pelo nome do leitor</label>
+                </div>
+        </div>
+        <!-- Botão de buscar -->
+        <div class="row">
+            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" value="Search">Buscar</button>
+        </div>
+        </form>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12">
+            <table class="responsive-table">
+
+                <head>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Número de celular</th>
+                        <th>E-mail</th>
+                        <th>Título do livro</th>
+                        <th>Empréstimo</th>
+                        <th>Devolução</th>
+                        <th></th>
+                    </tr>
+                </head>
+
+                <?php
+                foreach ($vet as $line) {
+                ?>
+
+                    <tr>
+                        <td><?= $line['id'] ?></td>
+                        <td><?= $line['nomeLeitor'] ?></td>
+                        <td><?= $line['sobrenomeLeitor'] ?></td>
+                        <td><?= $line['numeroCelular'] ?></td>
+                        <td><?= $line['email'] ?></td>
+                        <td><?= $line['nomeLivro'] ?></td>
+                        <td><?= $line['dataEmprestimo'] ?></td>
+                        <td><?= $line['dataDevolucao'] ?></td>
+
+                        <!-- PHP -->
+                        <?php
+                        if ($line['dataDevolucao'] < date('Y-m-d')) {
+                            echo '<td><p class="red lighten-1">Vencido</p></td>';
+                        } //if
+                        ?>
+
+                    </tr>
+
+                <?php
+                } //foreach
+                ?>
+            </table>
+        </div>
+    </div>
+
+
+
+    <!-- footer -->
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2022 Copyright Empresta Livro
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
